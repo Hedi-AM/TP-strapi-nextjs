@@ -1,0 +1,16 @@
+services:
+  backend:
+    build: ./backend-accessoires
+    ports:
+      - "1337:1337"
+    restart: always
+
+  frontend:
+    build: ./frontend-vitrine
+    ports:
+      - "3000:3000"
+    environment:
+      - API_INTERNAL_URL=http://backend:1337
+    depends_on:
+      - backend
+    restart: always
